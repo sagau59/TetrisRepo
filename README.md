@@ -5,10 +5,16 @@ I started by coding my own Tetris class, which is in *tetrisClass.py*. Then, I l
 
 # Simpler Tetris
 
-I then decided to make the game easier so I could figure out if my bot could win a game. I then coded the SimplerTetris class, which is a game with 7 rows and 4 columns and only blocks that are 2 tiles long. The code that beats the game is in *DQN_simpler.py*. After 5000 episodes, this agent looks like this :
+I then decided to make the game easier so I could figure out if my bot could win a game. I then coded the SimplerTetris class, which is a game with 7 rows and 4 columns and only blocks that are 2 tiles long. The code that beats the game is in *DQN_simpler.py*. After 5,000 episodes, this agent looks like this :
 
 ![alt text](https://github.com/sagau59/TetrisRepo/blob/master/images/simpler.gif)
 
-# Smaller Tetris
+You can play with the model with *playSimplerModel.py*.
 
-With a model able to beat my simpler game, I then tried to beat a smaller version of the game. Instead of a normal 15 rows and 10 columns, I tried to beat the game with 8 rows and 6 columns.
+# Smaller Tetris - squares only
+
+With a model able to beat my simpler game, I then tried to beat a smaller version of the game. Instead of a normal 15 rows and 10 columns, I tried to beat the game with 8 rows and 6 columns. The make the training easier, I started training the agent with only the square blocks. When the agent beats the game, I will build another agent based on this agent using transfer learning to beat the game. After 30,000 episodes only with squares, the agent looks like this :
+
+![alt text](https://github.com/sagau59/TetrisRepo/blob/master/images/smaller.gif)
+
+# Smaller Tetris - all blocks
