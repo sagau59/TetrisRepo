@@ -44,33 +44,53 @@ class DQN(nn.Module):
             return (size - (kernel_size - 1) - 1) // stride  + 1
         
         if self.layers == 1:
-            self.conv1 = nn.Conv2d(1, 128, kernel_size=2, stride=1)
-            self.bn1 = nn.BatchNorm2d(128)
+            self.conv1 = nn.Conv2d(1, 32, kernel_size=2, stride=1)
+            self.bn1 = nn.BatchNorm2d(32)
             convw = conv2d_size_out(w,2,1)
             convh = conv2d_size_out(h,2,1)
-            linear_input_size = convw * convh * 128
+            linear_input_size = convw * convh * 32
             self.head = nn.Linear(linear_input_size, outputs)
         
+        # Used for simpler Tetris
+        elif self.layers == 10:
+            self.conv1 = nn.Conv2d(1, 32, kernel_size=2, stride=1)
+            self.bn1 = nn.BatchNorm2d(32)
+            convw = conv2d_size_out(w,2,1)
+            convh = conv2d_size_out(h,2,1)
+            linear_input_size = convw * convh * 32
+            self.head = nn.Linear(linear_input_size, outputs)
+        
+        # Used for simpler Tetris
+        elif self.layers == 20:
+            self.conv1 = nn.Conv2d(1, 32, kernel_size=2, stride=1)
+            self.bn1 = nn.BatchNorm2d(32)
+            self.conv2 = nn.Conv2d(32, 64, kernel_size=2, stride=1)
+            self.bn2 = nn.BatchNorm2d(64)
+            convw = conv2d_size_out(conv2d_size_out(w,2,1),2,1)
+            convh = conv2d_size_out(conv2d_size_out(h,2,1),2,1)
+            linear_input_size = convw * convh * 64
+            self.head = nn.Linear(linear_input_size, outputs)
+            
         elif self.layers == 2:
-            self.conv1 = nn.Conv2d(1, 16, kernel_size=2, stride=1)
+            self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=2)
             self.bn1 = nn.BatchNorm2d(16)
             self.conv2 = nn.Conv2d(16, 32, kernel_size=2, stride=1)
             self.bn2 = nn.BatchNorm2d(32)
-            convw = conv2d_size_out(conv2d_size_out(w,2,1),2,1)
-            convh = conv2d_size_out(conv2d_size_out(h,2,1),2,1)
+            convw = conv2d_size_out(conv2d_size_out(w,3,2),2,1)
+            convh = conv2d_size_out(conv2d_size_out(h,3,2),2,1)
             linear_input_size = convw * convh * 32
             self.head = nn.Linear(linear_input_size, outputs)
         
         elif self.layers == 3:
-            self.conv1 = nn.Conv2d(1, 16, kernel_size=2, stride=1)
-            self.bn1 = nn.BatchNorm2d(16)
-            self.conv2 = nn.Conv2d(16, 32, kernel_size=2, stride=1)
-            self.bn2 = nn.BatchNorm2d(32)
-            self.conv3 = nn.Conv2d(32, 32, kernel_size=2, stride=1)
-            self.bn3 = nn.BatchNorm2d(32)
+            self.conv1 = nn.Conv2d(1, 32, kernel_size=2, stride=1)
+            self.bn1 = nn.BatchNorm2d(32)
+            self.conv2 = nn.Conv2d(32, 64, kernel_size=2, stride=1)
+            self.bn2 = nn.BatchNorm2d(64)
+            self.conv3 = nn.Conv2d(64, 128, kernel_size=2, stride=1)
+            self.bn3 = nn.BatchNorm2d(128)
             convw = conv2d_size_out(conv2d_size_out(conv2d_size_out(w,2,1),2,1),2,1)
             convh = conv2d_size_out(conv2d_size_out(conv2d_size_out(h,2,1),2,1),2,1)
-            linear_input_size = convw * convh * 32
+            linear_input_size = convw * convh * 128
             self.head = nn.Linear(linear_input_size, outputs)
             
         elif self.layers == 4:
@@ -86,10 +106,17 @@ class DQN(nn.Module):
         if self.layers == 1:
             x = F.relu(self.bn1(self.conv1(x)))
         
+        elif self.layers == 10:
+            x = F.relu(self.bn1(self.conv1(x)))
+            
         elif self.layers == 2:
             x = F.relu(self.bn1(self.conv1(x)))
             x = F.relu(self.bn2(self.conv2(x)))
         
+        elif self.layers == 20:
+            x = F.relu(self.bn1(self.conv1(x)))
+            x = F.relu(self.bn2(self.conv2(x)))
+            
         elif self.layers == 3:
             x = F.relu(self.bn1(self.conv1(x)))
             x = F.relu(self.bn2(self.conv2(x)))
