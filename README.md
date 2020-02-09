@@ -13,9 +13,10 @@ You can play with the model with *playSimplerModel.py*.
 
 # Smaller Tetris - squares only
 
-With a model able to beat my simpler game, I then tried to beat a smaller version of the game. Instead of a normal 15 rows and 10 columns, I tried to beat the game with 8 rows and 6 columns. The make the training easier, I started training the agent with only the square blocks. When the agent beats the game, I will build another agent based on this agent using transfer learning to beat the game. After 30,000 episodes only with squares, the agent looks like this :
+With a model able to beat my simpler game, I then tried to beat a smaller version of the game. Instead of a normal 15 rows and 10 columns, I tried to beat the game with 8 rows and 6 columns. The make the training easier, I started training the agent with only the square blocks. When the agent beats the game, I will build another agent based on this agent using transfer learning to beat the game. The code that beats the game is in *DQN_smaller.py* and *playSmallerModel.py* plays the game. After 30,000 episodes only with squares, the agent looks like this :
 
+![alt text](https://github.com/sagau59/TetrisRepo/blob/master/images/smaller.gif)
 
 # Smaller Tetris - all blocks
 
-![alt text](https://github.com/sagau59/TetrisRepo/blob/master/images/smaller.gif)
+
