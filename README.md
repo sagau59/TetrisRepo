@@ -19,4 +19,6 @@ With a model able to beat my simpler game, I then tried to beat a smaller versio
 
 # Smaller Tetris - all blocks
 
+After training my model to beat the game only with squares, I tried to use my pre-trained model to learn to beat the smaller game with all blocks. After 350,000 episodes for 72 hours of training on a GPU, but model still did not beat the game, only achieving a couple of points in average.
 
+![alt text](https://github.com/sagau59/TetrisRepo/blob/master/images/transfer.gif)
